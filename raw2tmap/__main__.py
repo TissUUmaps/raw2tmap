@@ -17,7 +17,7 @@ from raw2tmap import convert_raw_to_tmap
 )
 @click.version_option()
 def main(raw_file: BinaryIO, tmap_file: Path | None) -> None:
-    convert_raw_to_tmap(raw_file, tmap_file or sys.stdout)
+    convert_raw_to_tmap(raw_file, tmap_file or sys.stdout.buffer)
 
 
 if __name__ == "__main__":
