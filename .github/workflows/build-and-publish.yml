@@ -10,6 +10,7 @@ jobs:
   build-and-publish:
     name: pypi
     runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
     - uses: actions/checkout@v3
       with:
@@ -22,7 +23,6 @@ jobs:
     - name: Build a source tarball and a binary wheel
       run: python3 -m build --sdist --wheel --outdir dist/ .
     - uses: pypa/gh-action-pypi-publish@release/v1
-      if: startsWith(github.ref, 'refs/tags/v')
       with:
         user: __token__
         password: ${{ secrets.PYPI_TOKEN }}
