@@ -1,6 +1,6 @@
 # raw2tmap
 
-Convert OME-NGFF to TMAP
+Convert OME-Zarr to TMAP
 
 ## Installation
 
@@ -10,10 +10,12 @@ Use the package manager [pip](https://pip.pypa.io) to install raw2tmap:
 
 ## Usage
 
+To convert an OME-Zarr file to TMAP format:
+
     ❯ raw2tmap --help
     Usage: raw2tmap [OPTIONS] RAW_URL TMAP_FILE
 
-      Convert OME-NGFF to TMAP.
+      Convert OME-Zarr to TMAP.
 
     Options:
     -t INTEGER RANGE         Time index.  [x>=0]
@@ -26,13 +28,21 @@ Use the package manager [pip](https://pip.pypa.io) to install raw2tmap:
     --version                Show the version and exit.
     --help                   Show this message and exit.
 
+Example:
+
+    raw2tmap -t 0 -z 0 https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0052A/5514375.zarr 5514375.tmap
+
+OME-Zarr files can for example be created using [bioformats2raw](https://github.com/glencoesoftware/bioformats2raw).
+
 ## Support
 
 If you find a bug, please [raise an issue](https://github.com/TissUUmaps/raw2tmap/issues/new).
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome.
+
+For major changes, please open an issue first to discuss what you would like to change.
 
 ## Authors
 

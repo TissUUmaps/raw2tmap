@@ -23,7 +23,7 @@ class IntRangeOrStringParamType(click.ParamType):
             return str(value)
 
 
-@click.command(name="raw2tmap", help="Convert OME-NGFF to TMAP.")
+@click.command(name="raw2tmap", help="Convert OME-Zarr to TMAP.")
 @click.argument("raw_url", type=str)
 @click.argument("tmap_file", type=click.Path(path_type=Path))
 @click.option(
