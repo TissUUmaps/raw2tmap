@@ -18,7 +18,7 @@ except ImportError:
 
 from .model import Layer, Project
 
-_MICROMETERS_PER_UNIT: dict[str, float] = {
+MICROMETERS_PER_UNIT: dict[str, float] = {
     "angstrom": 1e-4,
     "attometer": 1e-12,
     "centimeter": 1e4,
@@ -175,7 +175,10 @@ def _get_xy_scales_um(
     xy_scales = [
         (scale_ct["scale"][x_axis], scale_ct["scale"][y_axis]) for scale_ct in scale_cts
     ]
-    if check_tissuumaps and any(x_scale != y_scale for x_scale, y_scale in xy_scales):
+    if check_tissuumaps and any(
+        x_scale * MICROMETERS_PER_UNIT[x_unit] != y_scale * MICROMETERS_PER_UNIT[y_unit]
+        for x_scale, y_scale in xy_scales
+    ):
         raise ValueError("TissUUmaps requires equal XY scales")
     if check_tissuumaps and any(
         x_scale != xy_scales[res - 1][0] * 2 or y_scale != xy_scales[res - 1][1] * 2
@@ -183,10 +186,7 @@ def _get_xy_scales_um(
     ):
         raise ValueError("TissUUmaps requires 2x scale difference between resolutions")
     return [
-        (
-            x_scale * _MICROMETERS_PER_UNIT[x_unit],
-            y_scale * _MICROMETERS_PER_UNIT[y_unit],
-        )
+        (x_scale * MICROMETERS_PER_UNIT[x_unit], y_scale * MICROMETERS_PER_UNIT[y_unit])
         for (x_scale, y_scale) in xy_scales
     ]
 
