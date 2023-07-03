@@ -78,7 +78,7 @@ def convert_raw_to_tmap(
             layer_name = zarr_location.basename()
         layer = Layer(
             name=layer_name,
-            tileSource=str(layer_img_file.relative_to(tmap_file.parent)),
+            tileSource=str(layer_img_file.relative_to(tmap_file.parent)) + ".dzi",
         )
         project.layers.append(layer)
     # write project
