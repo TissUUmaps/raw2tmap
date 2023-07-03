@@ -6,7 +6,7 @@ import numpy as np
 from ome_zarr.format import CurrentFormat, Format, format_from_version
 from ome_zarr.io import parse_url
 from ome_zarr.reader import Node, Reader
-from tifffile import TiffWriter
+from tifffile import FILETYPE, TiffWriter
 from tqdm.auto import tqdm
 
 from .model import Layer, Project
@@ -62,7 +62,7 @@ def convert_raw_to_tmap(
         with TiffWriter(layer_img_file) as f:
             f.write(layer_data[0], subifds=len(layer_data) - 1)
             for x in layer_data[1:]:
-                f.write(x, subfiletype=1)
+                f.write(x, subfiletype=FILETYPE.REDUCEDIMAGE)
         # create layer
         layer_name_components = [
             f"{axis_name.upper()}{index:02d}"
@@ -78,7 +78,7 @@ def convert_raw_to_tmap(
             layer_name = zarr_location.basename()
         layer = Layer(
             name=layer_name,
-            tile_source=str(layer_img_file.relative_to(tmap_file.parent)),
+            tileSource=str(layer_img_file.relative_to(tmap_file.parent)),
         )
         project.layers.append(layer)
     # write project

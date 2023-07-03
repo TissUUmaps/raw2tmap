@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class Layer(BaseModel):
     name: str
-    tile_source: str
+    tileSource: str
 
 
 class Project(BaseModel):
