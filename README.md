@@ -53,7 +53,7 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## Changelog
 
-[Changelog](CHANGELOG.md)
+[Changelog](https://github.com/TissUUmaps/raw2tmap/blob/main/CHANGELOG.md)
 
 ## Authors
 
@@ -61,4 +61,4 @@ For major changes, please open an issue first to discuss what you would like to 
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/TissUUmaps/raw2tmap/blob/main/LICENSE)
