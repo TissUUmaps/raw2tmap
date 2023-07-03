@@ -42,7 +42,7 @@ class IntRangeOrStringParamType(click.ParamType):
     "-z",
     "depth",
     type=click.IntRange(min=0),
-    help="Depth index.",
+    help="Depth (z) index.",
 )
 @click.option(
     "--layers",
