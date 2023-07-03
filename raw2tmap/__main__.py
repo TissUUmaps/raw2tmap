@@ -11,7 +11,7 @@ from raw2tmap import convert_raw_to_tmap
 class IntRangeOrStringParamType(click.ParamType):
     """A parameter type that accepts either an integer or a string."""
 
-    name = "text / integer"
+    name = "integer / text"
 
     def __init__(self, *args, **kwargs) -> None:
         self._int_range = click.IntRange(*args, **kwargs)

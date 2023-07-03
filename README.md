@@ -17,7 +17,7 @@ Use the package manager [pip](https://pip.pypa.io) to install raw2tmap:
 
     Options:
     -t INTEGER RANGE         Time index.  [x>=0]
-    -c TEXT / INTEGER        Channel index or name.
+    -c INTEGER / TEXT        Channel index or name.
     -z INTEGER RANGE         Depth index.  [x>=0]
     --layers DIRECTORY       Path to layer images, relative to TMAP_FILE.
                              Defaults to '.{TMAP_FILE}/layers'.
