@@ -1,7 +1,8 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 import click
+import tifffile
 from click.core import Context, Parameter
 from ome_zarr.format import CurrentFormat, format_implementations
 
@@ -16,7 +17,9 @@ class IntRangeOrStringParamType(click.ParamType):
     def __init__(self, *args, **kwargs) -> None:
         self._int_range = click.IntRange(*args, **kwargs)
 
-    def convert(self, value: Any, param: Parameter | None, ctx: Context | None) -> Any:
+    def convert(
+        self, value: Any, param: Union[Parameter, None], ctx: Union[Context, None]
+    ) -> Any:
         try:
             return self._int_range.convert(value, param, ctx)
         except click.BadParameter:
@@ -28,25 +31,28 @@ class IntRangeOrStringParamType(click.ParamType):
 @click.argument("tmap_file", type=click.Path(path_type=Path))
 @click.option(
     "-t",
+    "--time",
     "time",
     type=click.IntRange(min=0),
     help="Time index.",
 )
 @click.option(
     "-c",
+    "--channel",
     "channel",
     type=IntRangeOrStringParamType(min=0),
     help="Channel index or name.",
 )
 @click.option(
     "-z",
+    "--depth",
     "depth",
     type=click.IntRange(min=0),
     help="Depth (z) index.",
 )
 @click.option(
     "--layers",
-    "layer_img_dir",
+    "img_dir",
     type=click.Path(file_okay=False, path_type=Path),
     help=(
         "Path to layer images, relative to TMAP_FILE. "
@@ -54,7 +60,26 @@ class IntRangeOrStringParamType(click.ParamType):
     ),
 )
 @click.option(
-    "--fmt",
+    "--compression",
+    "compression",
+    type=click.Choice(
+        [c.name.lower() for c in tifffile.COMPRESSION], case_sensitive=False
+    ),
+    default="none",
+    show_default=True,
+    help="Compression algorithm.",
+    metavar="",  # hide choices in help text
+)
+@click.option(
+    "--tilesize",
+    "tile_size_px",
+    type=click.IntRange(min=0, min_open=True),
+    default=256,
+    show_default=True,
+    help="Tile size in pixels.",
+)
+@click.option(
+    "--format",
     "ome_zarr_format",
     type=click.Choice(
         sorted(fmt_impl.version for fmt_impl in format_implementations())
@@ -69,16 +94,18 @@ class IntRangeOrStringParamType(click.ParamType):
     "quiet",
     is_flag=True,
     default=False,
-    help="Quiet mode (hide progress bar).",
+    help="Quiet mode (suppress progress bar).",
 )
 @click.version_option()
 def main(
     raw_url: str,
     tmap_file: Path,
-    time: int | None,
-    channel: int | str | None,
-    depth: int | None,
-    layer_img_dir: Path | None,
+    time: Union[int, None],
+    channel: Union[int, str, None],
+    depth: Union[int, None],
+    img_dir: Union[Path, None],
+    compression: Union[str, None],
+    tile_size_px: int,
     ome_zarr_format: str,
     quiet: bool,
 ) -> None:
@@ -88,7 +115,9 @@ def main(
         time=time,
         channel=channel,
         depth=depth,
-        layer_img_dir=layer_img_dir,
+        img_dir=img_dir,
+        compression=compression,
+        tile_size_px=tile_size_px,
         ome_zarr_format=ome_zarr_format,
         progress=not quiet,
     )

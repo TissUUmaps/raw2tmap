@@ -18,15 +18,17 @@ To convert an OME-Zarr file to TMAP format:
       Convert OME-Zarr files to TMAP format.
 
     Options:
-    -t INTEGER RANGE         Time index.  [x>=0]
-    -c INTEGER / TEXT        Channel index or name.
-    -z INTEGER RANGE         Depth (z) index.  [x>=0]
-    --layers DIRECTORY       Path to layer images, relative to TMAP_FILE.
-                             Defaults to '.{TMAP_FILE}/layers'.
-    --fmt [0.1|0.2|0.3|0.4]  OME-Zarr format version.  [default: 0.4]
-    -q, --quiet              Quiet mode (hide progress bar).
-    --version                Show the version and exit.
-    --help                   Show this message and exit.
+      -t, --time INTEGER RANGE      Time index.  [x>=0]
+      -c, --channel INTEGER / TEXT  Channel index or name.
+      -z, --depth INTEGER RANGE     Depth (z) index.  [x>=0]
+      --layers DIRECTORY            Path to layer images, relative to TMAP_FILE.
+                                    Defaults to '.{TMAP_FILE}/layers'.
+      --compression                 Compression algorithm.  [default: none]
+      --tilesize INTEGER RANGE      Tile size in pixels.  [default: 256; x>0]
+      --format [0.1|0.2|0.3|0.4]    OME-Zarr format version.  [default: 0.4]
+      -q, --quiet                   Quiet mode (suppress progress bar).
+      --version                     Show the version and exit.
+      --help                        Show this message and exit.
 
 Example:
 
