@@ -1,6 +1,19 @@
 # raw2tmap
 
+![pypi](https://img.shields.io/pypi/v/raw2tmap?label=pypi&link=https%3A%2F%2Fpypi.org%2Fproject%2Fraw2tmap%2F)
+![python](https://img.shields.io/pypi/pyversions/raw2tmap?label=python&link=https%3A%2F%2Fwww.python.org)
+![build-and-publish](https://img.shields.io/github/actions/workflow/status/TissUUmaps/raw2tmap/build-and-publish.yml?label=build-and-publish&link=https%3A%2F%2Fgithub.com%2FTissUUmaps%2Fraw2tmap%2Factions%2Fworkflows%2Fbuild-and-publish.yml)
+![test](https://img.shields.io/github/actions/workflow/status/TissUUmaps/raw2tmap/test.yml?label=test&link=https%3A%2F%2Fgithub.com%2FTissUUmaps%2Fraw2tmap%2Factions%2Fworkflows%2Ftest.yml)
+![coverage](https://img.shields.io/codecov/c/gh/TissUUmaps/raw2tmap?label=coverage&link=https%3A%2F%2Fapp.codecov.io%2Fgh%2FTissUUmaps%2Fraw2tmap)
+![issues](https://img.shields.io/github/issues/TissUUmaps/raw2tmap?label=issues&link=https%3A%2F%2Fgithub.com%2FTissUUmaps%2Fraw2tmap%2Fissues)
+![pull requests](https://img.shields.io/github/issues-pr/TissUUmaps/raw2tmap?label=pull%20requests&link=https%3A%2F%2Fgithub.com%2FTissUUmaps%2Fraw2tmap%2Fpulls)
+![license](https://img.shields.io/github/license/TissUUmaps/raw2tmap?label=license&link=https%3A%2F%2Fgithub.com%2FTissUUmaps%2Fraw2tmap%2Fblob%2Fmain%2FLICENSE)
+
 Convert OME-Zarr files to TMAP format
+
+## Requirements
+
+This software requires [Python](https://www.python.org) 3.9 or later.
 
 ## Installation
 
