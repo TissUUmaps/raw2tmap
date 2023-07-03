@@ -49,7 +49,7 @@ MICROMETERS_PER_UNIT: dict[str, float] = {
 
 
 def convert_raw_to_tmap(
-    raw_file: Union[str, Path],
+    raw_file_or_url: Union[str, Path],
     tmap_file: Union[str, Path],
     time: Union[int, None] = None,
     channel: Union[int, str, None] = None,
@@ -63,7 +63,7 @@ def convert_raw_to_tmap(
 ) -> None:
     """Convert OME-Zarr files to TMAP format."""
     # validate arguments
-    raw_file = str(raw_file)
+    raw_file_or_url = str(raw_file_or_url)
     tmap_file = Path(tmap_file)
     if img_dir is None:
         img_dir = tmap_file.parent / f".{tmap_file.name}" / "layers"
@@ -76,9 +76,9 @@ def convert_raw_to_tmap(
     # open raw image
     if isinstance(ome_zarr_format, str):
         ome_zarr_format = format_from_version(ome_zarr_format)
-    zarr_location = parse_url(raw_file, fmt=ome_zarr_format or CurrentFormat())
+    zarr_location = parse_url(raw_file_or_url, fmt=ome_zarr_format or CurrentFormat())
     if zarr_location is None:
-        raise ValueError(f"Invalid raw URL: {raw_file}")
+        raise ValueError(f"Invalid raw file/URL: {raw_file_or_url}")
     reader = Reader(zarr_location)
     nodes = list(reader())
     img_node = nodes[0]
