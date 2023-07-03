@@ -7,6 +7,7 @@ import tifffile
 from ome_zarr.format import CurrentFormat, Format, format_from_version
 from ome_zarr.io import parse_url
 from ome_zarr.reader import Node, Reader
+from skimage.util import img_as_ubyte
 from tifffile import TiffWriter
 from tqdm.auto import tqdm
 
@@ -103,7 +104,7 @@ def convert_raw_to_tmap(
         with TiffWriter(img_file, bigtiff=True) as f:
             for i, (img, xy_scale_um) in enumerate(zip(layer_data, xy_scales_um)):
                 f.write(
-                    img,
+                    img_as_ubyte(img),
                     tile=(tile_size_px, tile_size_px),
                     compression=compression,
                     resolution=(1.0 / xy_scale_um[0], 1.0 / xy_scale_um[1]),
