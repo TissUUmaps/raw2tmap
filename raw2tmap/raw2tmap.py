@@ -10,9 +10,14 @@ from ome_zarr.reader import Node, Reader
 from tifffile import TiffWriter
 from tqdm.auto import tqdm
 
+try:
+    import pyvips
+except ImportError:
+    pyvips = None
+
 from .model import Layer, Project
 
-MICROMETERS_PER_UNIT: dict[str, float] = {
+_MICROMETERS_PER_UNIT: dict[str, float] = {
     "angstrom": 1e-4,
     "attometer": 1e-12,
     "centimeter": 1e4,
@@ -52,6 +57,7 @@ def convert_raw_to_tmap(
     compression: Union[str, None] = None,
     tile_size_px: int = 256,
     ome_zarr_format: Union[str, Format, None] = None,
+    write_dzi: bool = False,
     progress: bool = False,
 ) -> None:
     """Convert OME-Zarr files to TMAP format."""
@@ -64,6 +70,8 @@ def convert_raw_to_tmap(
         img_dir = tmap_file.parent / Path(img_dir)
     else:
         img_dir = Path(img_dir)
+    if write_dzi and not pyvips:
+        raise ImportError("pyvips is required for DZI writing")
     # open raw image
     if isinstance(ome_zarr_format, str):
         ome_zarr_format = format_from_version(ome_zarr_format)
@@ -85,7 +93,7 @@ def convert_raw_to_tmap(
     for layer_axis_name_indices, layer_data in _generate_image_layers(
         img_node, t=time, c=channel, z=depth, progress=progress
     ):
-        # write layer image
+        # write layer TIFF
         img_dir.mkdir(parents=True, exist_ok=True)
         img_file_name = Path(zarr_location.basename()).stem
         for axis_name, index in layer_axis_name_indices.items():
@@ -104,6 +112,18 @@ def convert_raw_to_tmap(
                     software=False,
                     subifds=len(layer_data) - 1 if i == 0 else None,
                 )
+        # convert to DZI
+        if write_dzi:
+            pyvips.Image.new_from_file(str(img_file)).dzsave(
+                str(img_file),
+                # basename=str(img_file.parent),
+                suffix=".jpg",
+                overlap=0,
+                tile_size=tile_size_px,
+                depth="onepixel",
+                background=0,
+            )
+            img_file.unlink()
         # create layer
         layer_name_components = [
             f"{axis_name.upper()}{index:02d}"
@@ -163,7 +183,10 @@ def _get_xy_scales_um(
     ):
         raise ValueError("TissUUmaps requires 2x scale difference between resolutions")
     return [
-        (x_scale * MICROMETERS_PER_UNIT[x_unit], y_scale * MICROMETERS_PER_UNIT[y_unit])
+        (
+            x_scale * _MICROMETERS_PER_UNIT[x_unit],
+            y_scale * _MICROMETERS_PER_UNIT[y_unit],
+        )
         for (x_scale, y_scale) in xy_scales
     ]
 

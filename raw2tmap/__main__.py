@@ -89,12 +89,19 @@ class IntRangeOrStringParamType(click.ParamType):
     help="OME-Zarr format version.",
 )
 @click.option(
+    "--dzi",
+    "write_dzi",
+    is_flag=True,
+    default=False,
+    help="Write DZI file (requires pyvips).",
+)
+@click.option(
     "-q",
     "--quiet",
     "quiet",
     is_flag=True,
     default=False,
-    help="Quiet mode (suppress progress bar).",
+    help="Quiet mode (hide progress bar).",
 )
 @click.version_option()
 def main(
@@ -107,6 +114,7 @@ def main(
     compression: Union[str, None],
     tile_size_px: int,
     ome_zarr_format: str,
+    write_dzi: bool,
     quiet: bool,
 ) -> None:
     convert_raw_to_tmap(
@@ -119,6 +127,7 @@ def main(
         compression=compression,
         tile_size_px=tile_size_px,
         ome_zarr_format=ome_zarr_format,
+        write_dzi=write_dzi,
         progress=not quiet,
     )
 
