@@ -64,10 +64,12 @@ class IntRangeOrStringParamType(click.ParamType):
     help="OME-Zarr format version.",
 )
 @click.option(
-    "--quiet/--no-quiet",
+    "-q",
+    "--quiet",
+    "quiet",
+    is_flag=True,
     default=False,
-    show_default=True,
-    help="Suppress progress bar.",
+    help="Quiet mode (hide progress bar).",
 )
 @click.version_option()
 def main(
