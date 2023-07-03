@@ -116,7 +116,6 @@ def convert_raw_to_tmap(
         if write_dzi:
             pyvips.Image.new_from_file(str(img_file)).dzsave(
                 str(img_file),
-                # basename=str(img_file.parent),
                 suffix=".jpg",
                 overlap=0,
                 tile_size=tile_size_px,
