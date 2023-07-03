@@ -83,7 +83,7 @@ def convert_raw_to_tmap(
         project.layers.append(layer)
     # write project
     with tmap_file.open("w", encoding="utf-8") as f:
-        f.write(project.model_dump_json(by_alias=True))
+        f.write(project.model_dump_json(indent=2, by_alias=True))
 
 
 def _generate_image_layers(
