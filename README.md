@@ -8,7 +8,7 @@ Use the package manager [pip](https://pip.pypa.io) to install raw2tmap:
 
     pip install raw2tmap
 
-To enable the `--dzi` option, install with the `dzi` extra (requires pyvips):
+To enable the `--dzi` option, install with the `dzi` extra (requires libvips):
 
     pip install "raw2tmap[dzi]"
 
@@ -30,7 +30,7 @@ To convert an OME-Zarr file to TMAP format:
       --compression                 Compression algorithm.  [default: none]
       --tilesize INTEGER RANGE      Tile size in pixels.  [default: 256; x>0]
       --format [0.1|0.2|0.3|0.4]    OME-Zarr format version.  [default: 0.4]
-      --dzi                         Write DZI file (requires pyvips).
+      --dzi                         Write DZI file (requires libvips).
       -q, --quiet                   Quiet mode (hide progress bar).
       --version                     Show the version and exit.
       --help                        Show this message and exit.

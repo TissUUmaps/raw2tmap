@@ -93,7 +93,7 @@ class IntRangeOrStringParamType(click.ParamType):
     "write_dzi",
     is_flag=True,
     default=False,
-    help="Write DZI file (requires pyvips).",
+    help="Write DZI file (requires libvips).",
 )
 @click.option(
     "-q",
