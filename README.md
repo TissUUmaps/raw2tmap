@@ -1,6 +1,6 @@
 # raw2tmap
 
-Convert OME-Zarr to TMAP
+Convert OME-Zarr files to TMAP format
 
 ## Installation
 
@@ -15,7 +15,7 @@ To convert an OME-Zarr file to TMAP format:
     ❯ raw2tmap --help
     Usage: raw2tmap [OPTIONS] RAW_URL TMAP_FILE
 
-      Convert OME-Zarr to TMAP.
+      Convert OME-Zarr files to TMAP format.
 
     Options:
     -t INTEGER RANGE         Time index.  [x>=0]

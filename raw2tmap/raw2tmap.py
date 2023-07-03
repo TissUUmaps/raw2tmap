@@ -22,7 +22,7 @@ def convert_raw_to_tmap(
     ome_zarr_format: str | Format | None = None,
     progress: bool = False,
 ) -> None:
-    """Convert OME-Zarr image to TMAP file."""
+    """Convert OME-Zarr files to TMAP format."""
     # validate arguments
     raw_url = str(raw_url)
     tmap_file = Path(tmap_file)
