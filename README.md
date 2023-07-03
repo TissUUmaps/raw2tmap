@@ -51,6 +51,10 @@ Pull requests are welcome.
 
 For major changes, please open an issue first to discuss what you would like to change.
 
+## Changelog
+
+[Changelog](CHANGELOG.md)
+
 ## Authors
 
 [SciLifeLab BioImage Informatics Facility (BIIF)](https://biifsweden.github.io)
