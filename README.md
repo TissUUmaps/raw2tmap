@@ -40,7 +40,7 @@ To convert an OME-Zarr file to TMAP format:
       -z, --depth INTEGER RANGE     Depth (z) index.  [x>=0]
       --layers DIRECTORY            Path to layer images, relative to TMAP_FILE.
                                     Defaults to '.{TMAP_FILE}/layers'.
-      --compression                 Compression algorithm.  [default: none]
+      --compression ALGORITHM       Compression algorithm.  [default: none]
       --tilesize INTEGER RANGE      Tile size in pixels.  [default: 256; x>0]
       --format [0.1|0.2|0.3|0.4]    OME-Zarr format version.  [default: 0.4]
       --dzi                         Write DZI file (requires pyvips).

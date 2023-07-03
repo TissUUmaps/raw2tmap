@@ -68,7 +68,7 @@ class IntRangeOrStringParamType(click.ParamType):
     default="none",
     show_default=True,
     help="Compression algorithm.",
-    metavar="",  # hide choices in help text
+    metavar="ALGORITHM",
 )
 @click.option(
     "--tilesize",
