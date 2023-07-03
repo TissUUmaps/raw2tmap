@@ -30,7 +30,7 @@ To enable the `--dzi` option, install with the `dzi` extra (requires libvips):
 To convert an OME-Zarr file to TMAP format:
 
     ❯ raw2tmap --help
-    Usage: raw2tmap [OPTIONS] RAW_URL TMAP_FILE
+    Usage: raw2tmap [OPTIONS] RAW_FILE TMAP_FILE
 
       Convert OME-Zarr files to TMAP format.
 

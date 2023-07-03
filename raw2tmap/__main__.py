@@ -27,7 +27,7 @@ class IntRangeOrStringParamType(click.ParamType):
 
 
 @click.command(name="raw2tmap", help="Convert OME-Zarr files to TMAP format.")
-@click.argument("raw_url", type=str)
+@click.argument("raw_file", type=str)
 @click.argument("tmap_file", type=click.Path(path_type=Path))
 @click.option(
     "-t",
@@ -105,7 +105,7 @@ class IntRangeOrStringParamType(click.ParamType):
 )
 @click.version_option()
 def main(
-    raw_url: str,
+    raw_file: str,
     tmap_file: Path,
     time: Union[int, None],
     channel: Union[int, str, None],
@@ -118,7 +118,7 @@ def main(
     quiet: bool,
 ) -> None:
     convert_raw_to_tmap(
-        raw_url,
+        raw_file,
         tmap_file,
         time=time,
         channel=channel,
