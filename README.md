@@ -50,7 +50,7 @@ To convert an OME-Zarr file to TMAP format:
 
 Example:
 
-    raw2tmap -t 0 -z 0 https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0052A/5514375.zarr 5514375.tmap
+    raw2tmap -t 0 -z 10 https://uk1s3.embassy.ebi.ac.uk/idr/zarr/v0.4/idr0052A/5514375.zarr 5514375.tmap
 
 OME-Zarr files can for example be created using [bioformats2raw](https://github.com/glencoesoftware/bioformats2raw).
 
