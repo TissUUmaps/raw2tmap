@@ -9,14 +9,14 @@ from ome_zarr.io import parse_url
 from ome_zarr.reader import Node, Reader
 from skimage.util import img_as_ubyte
 from tifffile import TiffWriter
+from tissuumaps_schema.v01 import Project
+from tissuumaps_schema.v01.project import Layer
 from tqdm.auto import tqdm
 
 try:
     import pyvips
 except ImportError:
     pyvips = None
-
-from .model import Layer, Project
 
 MICROMETERS_PER_UNIT: dict[str, float] = {
     "angstrom": 1e-4,
